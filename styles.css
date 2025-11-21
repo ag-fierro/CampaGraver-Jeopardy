@@ -2,12 +2,12 @@
 
 :root {
     /* Colores divertidos y vibrantes */
-    --color-fondo: #2c3e50; /* Azul Marino Oscuro (como el cielo nocturno) */
+    --color-fondo: #06262D;
     --color-tarjeta-normal: #1abc9c; /* Verde Menta Brillante (naturaleza) */
     --color-tarjeta-hover: #16a085; /* Verde Bosque al pasar el ratón */
     --color-encabezado: #e67e22; /* Naranja Calabaza Vibrante (fuego/sol) */
     --color-texto-claro: #f1c40f; /* Amarillo Sol (para puntos) */
-    --color-borde: #ecf0f1; /* Gris claro (contraste) */
+    --color-borde: #d1d1d1; /* Gris claro (contraste) */
     --color-usado: #34495e; /* Azul Grisáceo Oscuro */
 }
 
@@ -18,6 +18,31 @@ body {
     color: var(--color-borde);
     margin: 0;
     padding: 15px;
+}
+
+/* --- Estilos para el Encabezado y Logo --- */
+.game-header {
+    display: flex; /* Habilita Flexbox */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    margin-bottom: 20px; /* Espacio debajo del encabezado */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.game-header h1 {
+    font-size: 2.5em; /* Ajusta según lo desees */
+    margin: 0 20px 0 0; /* Margen derecho para separar del logo */
+    color: var(--color-encabezado);
+    text-shadow: 3px 3px 0px #000;
+    letter-spacing: 2px;
+    line-height: 1.2; /* Para el salto de línea en el título */
+    text-align: right; /* Alinea el texto a la derecha si la imagen está a la derecha */
+}
+
+.header-logo {
+    max-height: 200px; /* Ajusta el tamaño máximo del logo */
+    width: auto;
+    margin-left: 20px; /* Margen izquierdo para separar del título */
 }
 
 h1 {
@@ -48,14 +73,14 @@ h1 {
     background-color: var(--color-encabezado);
     color: #fff; /* Texto del encabezado en blanco */
     padding: 12px 5px; 
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
     border: 2px solid var(--color-borde);
-    text-shadow: 1px 1px 0px #000;
+    text-shadow: 2px 1px 0px #000;
     min-height: 50px; 
     letter-spacing: 3px;
 }
@@ -168,16 +193,18 @@ h1 {
     transform: rotateY(180deg);
 }
 
-/* 7. La tarjeta USADA ahora bloquea solo el contenedor principal */
 .question-card.used {
-    background-color: var(--color-usado);
-    color: transparent; 
-    cursor: default; 
-    pointer-events: none; 
-    border: none;
-    box-shadow: none;
-    opacity: 0.8;
+    /* Mantiene el color de fondo oscuro de bloqueo */
+    background-color: var(--color-usado); 
+    cursor: default;
+    color: var(--color-fondo); /* Texto invisible */ 
+    pointer-events: none; /* Crucial: impide clics futuros */
+    border: 3px solid #555; 
+    box-shadow: 0 0 0 #000;
+    transform: none;
+    opacity: 0.4;
 }
+
 
 /* --- ESTILOS DEL MODAL --- */
 

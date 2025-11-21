@@ -65,10 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const preguntaData = categoria.preguntas[i];
                     
                     const card = document.createElement('div');
-                    card.className = 'question-card';
+                    card.className = 'question-card ';
                     // Almacenar todos los datos importantes en atributos data-*
                     card.setAttribute('data-points', preguntaData.puntaje);
                     card.setAttribute('data-category', categoria.nombre);
+                    card.setAttribute('data-icon', categoria.icono || '');
                     card.setAttribute('data-pregunta', preguntaData.pregunta);
                     card.setAttribute('data-respuesta', preguntaData.respuesta);
 
@@ -76,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.innerHTML = `
                         <div class="card-inner">
                             <div class="card-face card-front">
-                                ${preguntaData.puntaje}
+                                ${preguntaData.titulo}
                             </div>
                             <div class="card-face card-back">
-                                <span class="back-text">¡LISTO!</span>
+                                <span class="back-text">${categoria.icono || ''}</span>
                             </div>
                         </div>
                     `;
@@ -108,14 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Muestra el modal después del giro
         setTimeout(() => {
 
-            if (isNaN(currentCard.getAttribute('data-points'))) {
+            if (currentCard.getAttribute('data-points') == 0) {
                 mensaje = `Preparate para el desafío especial!`
             }
             else{
                 mensaje = `${currentCard.getAttribute('data-points')} Puntos`
             }
             
-            document.getElementById('modalCategory').textContent = currentCard.getAttribute('data-category');
+            document.getElementById('modalCategory').textContent = currentCard.getAttribute('data-category') + " " + currentCard.getAttribute('data-icon');
             document.getElementById('modalPoints').textContent = mensaje;
             document.getElementById('modalQuestion').textContent = currentCard.getAttribute('data-pregunta');
             
