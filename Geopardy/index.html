@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego Jeopardy (Campamento)</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <h1>Juego de Aventura y Campamento</h1>
+
+    <div id="jeopardyGrid" class="jeopardy-grid">
+        </div>
+
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalCategory"></h2>
+            <p class="points-label" id="modalPoints"></p>
+            <div class="question-container">
+                <p class="question-text" id="modalQuestion"></p>
+            </div>
+            <button id="revealAnswerBtn" class="action-btn">Mostrar Respuesta</button>
+            <div class="answer-container hidden" id="answerContainer">
+                <p class="answer-text" id="modalAnswer"></p>
+            </div>
+            <button id="closeAndLockBtn" class="action-btn close-lock-btn">Cerrar y Bloquear</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

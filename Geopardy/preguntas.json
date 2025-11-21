@@ -1,0 +1,104 @@
+{
+    "Categorias":[
+        {
+            "nombre":"Deportes",
+            "preguntas":[
+                {
+                    "pregunta":"¿Cuál es la fórmula química del agua?",
+                    "puntaje": 100
+                },
+                {
+                    "pregunta":"¿Qué planeta es conocido como el Planeta Rojo?",
+                    "puntaje": 200
+                },
+                {
+                    "pregunta":"¿Quién escribió 'Cien años de soledad'?",
+                    "puntaje": 300
+                },
+                {
+                    "pregunta":"¿Cuál es la capital de Japón?",
+                    "puntaje": 400
+                },
+                {
+                    "pregunta":"",
+                    "puntaje": "Desafío"
+                }
+            ]
+        },
+        {
+            "nombre":"Historia",
+            "preguntas":[
+                {
+                    "pregunta":"¿Quién fue el primer presidente de los Estados Unidos?",
+                    "puntaje": 100
+                },
+                {
+                    "pregunta":"¿En qué año comenzó la Segunda Guerra Mundial?",
+                    "puntaje": 200
+                },
+                {
+                    "pregunta":"¿Cuál fue la civilización antigua que construyó las pirámides?",
+                    "puntaje": 300
+                },
+                {
+                    "pregunta":"¿Quién escribió la 'Ilíada' y la 'Odisea'?",
+                    "puntaje": 400
+                },
+                {
+                    "pregunta":"",
+                    "puntaje": "Desafío"
+                }
+            ]
+        },
+        {
+            "nombre":"Entretenimiento",
+            "preguntas":[
+                {
+                    "pregunta":"¿Quién fue el primer presidente de los Estados Unidos?",
+                    "puntaje": 100
+                },
+                {
+                    "pregunta":"¿En qué año comenzó la Segunda Guerra Mundial?",
+                    "puntaje": 200
+                },
+                {
+                    "pregunta":"¿Cuál fue la civilización antigua que construyó las pirámides?",
+                    "puntaje": 300
+                },
+                {
+                    "pregunta":"¿Quién escribió la 'Ilíada' y la 'Odisea'?",
+                    "puntaje": 400
+                },
+                {
+                    "pregunta":"",
+                    "puntaje": "Desafío"
+                }
+            ]
+        },
+        {
+            "nombre":"Biblia",
+            "preguntas":[
+                {
+                    "pregunta":"¿Quién fue el primer presidente de los Estados Unidos?",
+                    "puntaje": 100
+                },
+                {
+                    "pregunta":"¿En qué año comenzó la Segunda Guerra Mundial?",
+                    "puntaje": 200
+                },
+                {
+                    "pregunta":"¿Cuál fue la civilización antigua que construyó las pirámides?",
+                    "puntaje": 300
+                },
+                {
+                    "pregunta":"¿Quién escribió la 'Ilíada' y la 'Odisea'?",
+                    "puntaje": 400
+                },
+                {
+                    "pregunta":"",
+                    "puntaje": "Desafío"
+                }
+            ]
+        }
+    ]
+}

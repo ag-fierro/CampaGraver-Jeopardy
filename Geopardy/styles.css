@@ -1,0 +1,279 @@
+/* styles.css - Hoja de Estilos Tema Campamento/Aventura */
+
+:root {
+    /* Colores divertidos y vibrantes */
+    --color-fondo: #2c3e50; /* Azul Marino Oscuro (como el cielo nocturno) */
+    --color-tarjeta-normal: #1abc9c; /* Verde Menta Brillante (naturaleza) */
+    --color-tarjeta-hover: #16a085; /* Verde Bosque al pasar el ratón */
+    --color-encabezado: #e67e22; /* Naranja Calabaza Vibrante (fuego/sol) */
+    --color-texto-claro: #f1c40f; /* Amarillo Sol (para puntos) */
+    --color-borde: #ecf0f1; /* Gris claro (contraste) */
+    --color-usado: #34495e; /* Azul Grisáceo Oscuro */
+}
+
+body {
+    font-family: 'Bebas Neue', 'Impact', sans-serif; /* Fuente audaz y alta */
+    text-align: center;
+    background-color: var(--color-fondo);
+    color: var(--color-borde);
+    margin: 0;
+    padding: 15px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--color-encabezado);
+    text-shadow: 3px 3px 0px #000;
+    letter-spacing: 2px;
+}
+
+/* --- Rejilla del Tablero (Compacta) --- */
+.jeopardy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: auto repeat(5, 1fr); 
+    gap: 10px; 
+    width: 90%; 
+    max-width: 900px; /* Tamaño máximo aún compacto */
+    margin: 10px auto;
+    border: 5px solid var(--color-borde);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra dramática */
+}
+
+/* --- Encabezados de Categoría --- */
+.category-header {
+    background-color: var(--color-encabezado);
+    color: #fff; /* Texto del encabezado en blanco */
+    padding: 12px 5px; 
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    border: 2px solid var(--color-borde);
+    text-shadow: 1px 1px 0px #000;
+    min-height: 50px; 
+}
+
+/* --- Tarjetas de Pregunta (Vibrantes) --- */
+.question-card {
+    background-color: var(--color-tarjeta-normal);
+    color: var(--color-texto-claro); /* Amarillo brillante para los puntos */
+    padding: 10px; 
+    font-size: 2em; /* Puntos grandes para fácil lectura */
+    font-weight: 900; 
+    cursor: pointer; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s;
+    user-select: none;
+    border: 3px solid var(--color-borde);
+    border-radius: 5px;
+    min-height: 70px; 
+    
+    /* Efecto de 'Sticker' */
+    box-shadow: 4px 4px 0px #000;
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.question-card:not(.used):hover {
+    background-color: var(--color-tarjeta-hover);
+    transform: translate(-2px, -2px); /* Mueve el 'sticker' */
+    box-shadow: 6px 6px 0px #000;
+}
+
+/* --- Tarjeta Bloqueada (Usada) --- */
+.question-card.used {
+    background-color: var(--color-usado);
+    color: transparent; 
+    cursor: default; 
+    pointer-events: none; 
+    border: 3px solid #555; 
+    box-shadow: 0 0 0 #000; /* Quita el efecto 'sticker' */
+    transform: none;
+    opacity: 0.8; /* Se ve ligeramente opaca */
+}
+
+/* --- AÑADIR/MODIFICAR ESTILOS PARA EL EFECTO FLIP --- */
+
+/* 1. Establecer la Perspectiva para el efecto 3D en la rejilla */
+.jeopardy-grid {
+    /* ... estilos existentes ... */
+    perspective: 1000px; /* Importante para el 3D */
+}
+
+.question-card {
+    /* ... estilos existentes ... */
+    /* El contenedor principal de la tarjeta ya no necesita el padding */
+    padding: 0; 
+    border: none; /* Quitamos el borde para un look más limpio en el flip */
+}
+
+/* 2. Contenedor interno que rota */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s; /* Velocidad de la animación de giro */
+    transform-style: preserve-3d; /* Permite el giro 3D */
+}
+
+/* 3. Las dos caras de la tarjeta */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Oculta la parte trasera de la cara al girar */
+    backface-visibility: hidden; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    background-color: inherit;
+    
+    /* Hereda los bordes y sombras del .question-card para mantener el estilo */
+    border: 3px solid var(--color-borde); 
+    border-radius: 5px;
+    box-shadow: 4px 4px 0px #000;
+}
+
+/* 4. Estilo de la cara frontal (puntos) */
+.card-front {
+    background-color: var(--color-tarjeta-normal);
+}
+
+/* 5. Estilo de la cara trasera (que se ve brevemente) */
+.card-back {
+    background-color: var(--color-tarjeta-hover);
+    transform: rotateY(180deg); /* Voltear inicialmente para que esté oculta */
+    color: #fff;
+}
+
+.card-back .back-text {
+    font-size: 1.2em;
+}
+
+/* 6. Clase de animación para el giro (se añade con JS) */
+.question-card.flipping .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* 7. La tarjeta USADA ahora bloquea solo el contenedor principal */
+.question-card.used {
+    background-color: var(--color-usado);
+    color: transparent; 
+    cursor: default; 
+    pointer-events: none; 
+    border: none;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* --- ESTILOS DEL MODAL --- */
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semitransparente */
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border: 5px solid var(--color-encabezado);
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: #333;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Animación de entrada del modal */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos de contenido del Modal */
+#modalCategory, #modalPoints {
+    color: var(--color-encabezado);
+    font-weight: bold;
+}
+
+.question-text {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #000;
+}
+
+.action-btn {
+    background-color: var(--color-tarjeta-normal);
+    color: var(--color-texto-claro);
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: var(--color-tarjeta-hover);
+}
+
+.close-lock-btn {
+    background-color: #e74c3c; /* Rojo para el botón de cierre */
+}
+
+.close-lock-btn:hover {
+    background-color: #c0392b;
+}
+
+.answer-container {
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px dashed #7f8c8d;
+    background-color: #ecf0f1;
+}
+
+.answer-text {
+    font-size: 1.2em;
+    color: #2c3e50;
+}
+
+.hidden {
+    display: none !important;
+}
