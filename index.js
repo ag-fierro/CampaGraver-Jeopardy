@@ -4,15 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('questionModal');
     const closeBtn = document.querySelector('.close-button');
     const closeLockBtn = document.getElementById('closeAndLockBtn');
-    const revealAnswerBtn = document.getElementById('revealAnswerBtn');
-    const answerContainer = document.getElementById('answerContainer');
+   
 
     let currentCard = null;
 
     // --- Funciones del Modal (Mantener iguales) ---
     const showModal = () => {
-        answerContainer.classList.add('hidden');
-        revealAnswerBtn.style.display = 'block';
+
         modal.style.display = 'block';
     };
 
@@ -24,16 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     closeBtn.addEventListener('click', hideModal);
+
     closeLockBtn.addEventListener('click', () => {
         if (currentCard) {
             currentCard.classList.add('used');
         }
         hideModal();
     });
-    revealAnswerBtn.addEventListener('click', () => {
-        answerContainer.classList.remove('hidden');
-        revealAnswerBtn.style.display = 'none';
-    });
+
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             hideModal();
@@ -111,10 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Muestra el modal después del giro
         setTimeout(() => {
+
+            if (isNaN(currentCard.getAttribute('data-points'))) {
+                mensaje = `Preparate para el desafío especial!`
+            }
+            else{
+                mensaje = `${currentCard.getAttribute('data-points')} Puntos`
+            }
+            
             document.getElementById('modalCategory').textContent = currentCard.getAttribute('data-category');
-            document.getElementById('modalPoints').textContent = `${currentCard.getAttribute('data-points')} Puntos`;
+            document.getElementById('modalPoints').textContent = mensaje;
             document.getElementById('modalQuestion').textContent = currentCard.getAttribute('data-pregunta');
-            document.getElementById('modalAnswer').textContent = currentCard.getAttribute('data-respuesta');
+            
             
             showModal();
         }, 600); // Coincide con la duración de la transición CSS

@@ -25,7 +25,7 @@ h1 {
     margin-bottom: 20px;
     color: var(--color-encabezado);
     text-shadow: 3px 3px 0px #000;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 /* --- Rejilla del Tablero (Compacta) --- */
@@ -33,12 +33,13 @@ h1 {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     grid-template-rows: auto repeat(5, 1fr); 
-    gap: 10px; 
+    gap: 15px 30px; 
     width: 90%; 
     max-width: 900px; /* Tamaño máximo aún compacto */
     margin: 10px auto;
     border: 5px solid var(--color-borde);
     border-radius: 10px;
+    padding: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra dramática */
 }
 
@@ -56,6 +57,7 @@ h1 {
     border: 2px solid var(--color-borde);
     text-shadow: 1px 1px 0px #000;
     min-height: 50px; 
+    letter-spacing: 3px;
 }
 
 /* --- Tarjetas de Pregunta (Vibrantes) --- */
