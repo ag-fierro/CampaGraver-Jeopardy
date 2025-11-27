@@ -21,7 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    closeBtn.addEventListener('click', hideModal);
+    closeBtn.addEventListener('click', () => {
+        if (currentCard) {
+            currentCard.classList.add('used');
+        }
+        hideModal();
+    });
 
     closeLockBtn.addEventListener('click', () => {
         if (currentCard) {
@@ -118,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.getElementById('modalCategory').textContent = currentCard.getAttribute('data-category') + " " + currentCard.getAttribute('data-icon');
             document.getElementById('modalPoints').textContent = mensaje;
-            document.getElementById('modalQuestion').textContent = currentCard.getAttribute('data-pregunta');
+            document.getElementById('modalQuestion').innerHTML = currentCard.getAttribute('data-pregunta');
             
             
             showModal();
