@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcador de Equipos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <header class="game-header">
+        <img src="src/leftdecor.png" height="300" alt="Decoración izquierda" class="header-logo">
+        <h1>Carrera de mentes <br> MARCADORES</h1>
+        <img src="src/logocamp.png" height="300" alt="Logo Campamento Graver" class="header-logo">
+    </header>
+    
+    <div class="floating-controls">
+        <button id="toggle-edit-btn" class="action-btn toggle-edit-btn close-lock-btn">
+            ✏️
+        </button>
+    </div>
+
+    <div id="score-container" class="score-container">
+        <ul id="score-list" class="score-list">
+            </ul>
+        
+        
+    </div>
+
+<script>
+    // 1. Datos iniciales del JSON (o de una variable)
+    const teamsData = [
+        { name: "Sensato (SS)", score: 0 },
+        { name: "Idealista (IDL)", score: 0 },
+        { name: "Razonable (RZ)", score: 0 },
+        { name: "Paradójico (PJ)", score: 0 },
+        { name: "Abstracto (ABS)", score: 0 },
+        { name: "Irónico (IN)", score: 0 },
+        { name: "Crítico (CT)", score: 0 },
+        { name: "Metafórico (MT)", score: 0 },
+        { name: "Impreciso (Ñ)", score: 0 },
+        { name: "Coherente (COH)", score: 0 }
+    ];
+
+    const scoreList = document.getElementById('score-list');
+    const toggleEditBtn = document.getElementById('toggle-edit-btn');
+    const scoreContainer = document.getElementById('score-container');
+
+    let isEditing = false;
+
+    // 2. Función para renderizar la lista de equipos
+    function renderTeams() {
+        // Ordenar equipos por puntaje (descendente)
+        teamsData.sort((a, b) => b.score - a.score); 
+        
+        scoreList.innerHTML = ''; // Limpiar lista
+        
+        teamsData.forEach((team, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'team-item';
+            
+            // Renderizado del HTML de cada equipo
+            listItem.innerHTML = `
+                <span class="team-cardinal">${index + 1}.</span>
+                <span class="team-name">${team.name}</span>
+                
+                <span id="score-${team.name.replace(/\s/g, '-')}" class="team-score">${team.score}</span>
+                
+                <div class="edit-controls">
+                    <button class="action-btn edit-btn minus-btn" data-team="${team.name}" data-action="-">-</button>
+                    <input type="number" class="score-input" value="${team.score}" data-team="${team.name}" disabled>
+                    <button class="action-btn edit-btn plus-btn" data-team="${team.name}" data-action="+">+</button>
+                </div>
+            `;
+            scoreList.appendChild(listItem);
+        });
+
+        // Re-asignar eventos de botones después de renderizar
+        assignButtonEvents();
+    }
+
+    // 3. Función para manejar los eventos de los botones +/-
+    function assignButtonEvents() {
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.removeEventListener('click', handleScoreChange); // Evita duplicados
+            button.addEventListener('click', handleScoreChange);
+        });
+    }
+
+    function handleScoreChange(event) {
+        const teamName = event.target.dataset.team;
+        const action = event.target.dataset.action;
+        
+        // Encontrar el equipo en los datos
+        const teamIndex = teamsData.findIndex(t => t.name === teamName);
+        if (teamIndex === -1) return;
+        
+        // Modificar puntaje
+        if (action === '+') {
+            teamsData[teamIndex].score += 100; // Suma 100 puntos por ejemplo
+        } else if (action === '-') {
+            teamsData[teamIndex].score = Math.max(0, teamsData[teamIndex].score - 100); // Resta 100, mínimo 0
+        }
+
+        // Re-renderizar la lista para reflejar el cambio y el orden
+        renderTeams();
+        
+        // **IMPORTANTE**: Re-activar el modo edición después del re-render
+        if (isEditing) {
+             scoreContainer.classList.add('editing');
+        }
+    }
+
+
+    // 4. Función para alternar el modo Edición
+    toggleEditBtn.addEventListener('click', () => {
+        isEditing = !isEditing;
+        
+        scoreContainer.classList.toggle('editing', isEditing);
+        
+        if (isEditing) {
+            toggleEditBtn.textContent = '💾';
+        } else {
+            toggleEditBtn.textContent = '✏️';
+        }
+        
+        // Re-renderizar para actualizar inputs y orden final
+        renderTeams();
+    });
+
+    // 5. Inicializar el marcador
+    renderTeams();
+</script>
+</body>
+</html>
